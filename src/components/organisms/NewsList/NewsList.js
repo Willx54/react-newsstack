@@ -1,16 +1,23 @@
 import React from 'react';
+import NewsItem from '../../molecules/NewsItem/NewsItem';
+import styled from 'styled-components';
 
-const NewsList = (props) => {
+const List = styled.ul`
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+`;
+
+const NewsList = (props) => { 
     return (
         <div>
-            <ul>
-                <li>news item</li>
-                <li>news item</li>
-                <li>news item</li>
-                <li>news item</li>
-                <li>news item</li>
-            </ul>
-        </div>
+        <List>
+            {props.articles.map(article => <NewsItem key={article.url} article={article}/>)}
+        </List>
+        
+    </div>
     );
 }
 

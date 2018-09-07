@@ -1,23 +1,59 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Image = styled.img`
+const Image = styled.div`
     width: 100%;
+    min-height: 200px;
     max-width: 100%;
+    background: url('${props => props.imageUrl}') center center no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: flex-end;
 `;
 
 const ListItem = styled.li`
     display: block;
-    width: 25%;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    @media only screen and (min-width: 600px) {
+        width: 50%;
+    }
+    @media only screen and (min-width: 900px) {
+        width: 33.33333%;
+    }
+    @media only screen and (min-width: 1100px) {
+        width: 25%;
+    }
+`;
+
+const Anchor = styled.a`
+    text-decoration: none;
+    color: #000000;
+
+`;
+
+const Title = styled.p`
+    margin: 0 30px 20px 0;
+    padding: 8px;
+    background-color: rgba(255,255,255,0.8);
 `;
 
 const NewsItem = (props) => {
+    let limitTitle = props.article.title;
+
+    console.log(props.article)
+    if (limitTitle.length > 99) {
+        limitTitle = limitTitle.substring(0,100) + '...';
+    }
+
     return (
         <ListItem>
-            <a href={props.article.url} target="_blank">
-                <Image src={props.article.urlToImage} alt="alt text" />
-                <p>{props.article.description}</p>
-            </a>
+            <Anchor href={props.article.url} target="_blank">
+                <Image imageUrl={props.article.urlToImage}>
+                    <Title>{limitTitle}</Title>
+                </Image>
+            </Anchor>
         </ListItem>
     );
 }

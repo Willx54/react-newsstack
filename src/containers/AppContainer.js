@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 import NewsList from '../components/organisms/NewsList/NewsList';
 import styled from 'styled-components';
-import { get, isEqual } from 'lodash';
-
-const Header = styled.header`
-  height: 80px;
-  background-color: #eee;
-`;
+import Header from '../components/organisms/Header/Header';
+// import { get, isEqual } from 'lodash';
 
 const Footer = styled.footer`
   height: 80px;
@@ -30,19 +26,9 @@ const Menu = styled.nav`
   }
 `;
 
-const newsStrings = {
-  "bbc": 'bbc-news',
-  "cnn": "cnn",
-  "financial times": "financial-times",
-  "independent": "independent",
-  "mtv": "mtv-news",
-  "national geographic": "national-geographic"
-}
-
 class AppContainer extends React.Component {
   state = {
-    articles: [],
-    newsSelection: 'bbc-news'
+    articles: []
   }
 
   componentDidMount() {
@@ -59,8 +45,6 @@ class AppContainer extends React.Component {
   }
   
   changeChannel = (e) => {
-    console.log('change channel');
-    // console.log(e.target.id);
     let newChannel = e.target.id;
     this.getNews(newChannel);
   }
@@ -72,7 +56,6 @@ class AppContainer extends React.Component {
       <div>
         <Header>header</Header>
         <Container>
-        <div>SELECTION: {this.state.newsSelection}</div>
           <Menu>
             <ul>
               <li><button id="bbc-news" onClick={this.changeChannel}>bbc</button></li>

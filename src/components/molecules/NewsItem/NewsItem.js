@@ -7,8 +7,7 @@ const Image = styled.div`
     max-width: 100%;
     background: url('${props => props.imageUrl}') center center no-repeat;
     background-size: cover;
-    display: flex;
-    align-items: flex-end;
+    transition: transform 1s ease;
 `;
 
 const ListItem = styled.li`
@@ -30,13 +29,20 @@ const ListItem = styled.li`
 const Anchor = styled.a`
     text-decoration: none;
     color: #000000;
-
+    overflow: hidden;
+    display: block;
+    position: relative;
+    &:hover ${Image} {
+        transform: scale(1.1);
+    }
 `;
 
 const Title = styled.p`
     margin: 0 30px 20px 0;
     padding: 8px;
     background-color: rgba(255,255,255,0.8);
+    position: absolute;
+    bottom: 16px;
 `;
 
 const NewsItem = (props) => {
@@ -50,9 +56,8 @@ const NewsItem = (props) => {
     return (
         <ListItem>
             <Anchor href={props.article.url} target="_blank">
-                <Image imageUrl={props.article.urlToImage}>
-                    <Title>{limitTitle}</Title>
-                </Image>
+                <Image imageUrl={props.article.urlToImage}/>
+                <Title>{limitTitle}</Title>
             </Anchor>
         </ListItem>
     );

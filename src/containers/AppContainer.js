@@ -3,15 +3,11 @@ import axios from 'axios';
 import NewsList from '../components/organisms/NewsList/NewsList';
 import styled from 'styled-components';
 import Header from '../components/organisms/Header/Header';
+import Footer from '../components/organisms/Footer/Footer';
 // import { get, isEqual } from 'lodash';
 
-const Footer = styled.footer`
-  height: 80px;
-  background-color: #ddd;
-`;
-
 const Container = styled.div`
-  padding: 0 15px;
+  padding: 32px 8px 72px 8px;
   max-width: 1200px;
   margin: 0 auto;
 `;
@@ -54,7 +50,7 @@ class AppContainer extends React.Component {
 
     return (
       <div>
-        <Header>header</Header>
+        <Header/>
         <Container>
           <Menu>
             <ul>
@@ -68,7 +64,7 @@ class AppContainer extends React.Component {
           </Menu>
           <NewsList articles={this.state.articles}/>
         </Container>
-        <Footer>footer</Footer>
+        <Footer/>
       </div>
     );
   }

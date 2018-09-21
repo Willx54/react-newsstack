@@ -13,12 +13,22 @@ const Container = styled.div`
 `;
 
 const Menu = styled.nav`
+padding: 0 4px;
   ul {
     list-style-type: none;
+    padding: 0;
+    margin: 0;
   }
   li {
     display: inline;
-    padding: 0 5px;
+  }
+  button {
+    background-color: #27546f;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    padding: 4px;
+    margin: 4px;
   }
 `;
 

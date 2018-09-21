@@ -4,7 +4,6 @@ import logo from './logo.svg';
 
 
 const HeaderWrap = styled.header`
-
     background-color: #27546f;
 `;
 

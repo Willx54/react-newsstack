@@ -3,6 +3,7 @@ import axios from 'axios';
 import NewsList from '../components/organisms/NewsList/NewsList';
 import styled from 'styled-components';
 import Header from '../components/organisms/Header/Header';
+import PrimaryNav from '../components/organisms/PrimaryNav/PrimaryNav';
 import Footer from '../components/organisms/Footer/Footer';
 // import { get, isEqual } from 'lodash';
 
@@ -10,26 +11,6 @@ const Container = styled.div`
   padding: 32px 8px 72px 8px;
   max-width: 1200px;
   margin: 0 auto;
-`;
-
-const Menu = styled.nav`
-padding: 0 4px;
-  ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  li {
-    display: inline;
-  }
-  button {
-    background-color: #27546f;
-    border: none;
-    border-radius: 3px;
-    color: #fff;
-    padding: 4px;
-    margin: 4px;
-  }
 `;
 
 class AppContainer extends React.Component {
@@ -62,16 +43,7 @@ class AppContainer extends React.Component {
       <div>
         <Header/>
         <Container>
-          <Menu>
-            <ul>
-              <li><button id="bbc-news" onClick={this.changeChannel}>bbc</button></li>
-              <li><button id="cnn" onClick={this.changeChannel}>cnn</button></li>
-              <li><button id="financial-times" onClick={this.changeChannel}>financial times</button></li>
-              <li><button id="independent" onClick={this.changeChannel}>independent</button></li>
-              <li><button id="mtv-news" onClick={this.changeChannel}>mtv</button></li>
-              <li><button id="national-geographic" onClick={this.changeChannel}>national geographic</button></li>
-            </ul>
-          </Menu>
+          <PrimaryNav changeChannel={this.changeChannel}/>
           <NewsList articles={this.state.articles}/>
         </Container>
         <Footer/>

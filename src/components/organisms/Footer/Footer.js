@@ -41,7 +41,7 @@ const Footer = (props) => {
     return(
         <FooterWrap>
             <Container>
-                <PoweredBy>powered by <a href="https://newsapi.org/" target="_blank">newsapi.org</a></PoweredBy>
+                <PoweredBy>powered by <a href="https://newsapi.org/" target="_blank" rel="noopener noreferrer">newsapi.org</a></PoweredBy>
                 <ContactLink href="mailto:W_Priddle@hotmail.com">contact</ContactLink>
             </Container>
         </FooterWrap>

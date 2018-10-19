@@ -48,14 +48,13 @@ const Title = styled.p`
 const NewsItem = (props) => {
     let limitTitle = props.article.title;
 
-    console.log(props.article)
     if (limitTitle.length > 99) {
         limitTitle = limitTitle.substring(0,100) + '...';
     }
 
     return (
         <ListItem>
-            <Anchor href={props.article.url} target="_blank">
+            <Anchor href={props.article.url} target="_blank" rel="noopener noreferrer">
                 <Image imageUrl={props.article.urlToImage}/>
                 <Title>{limitTitle}</Title>
             </Anchor>

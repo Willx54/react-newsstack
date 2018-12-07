@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Header from '../components/organisms/Header/Header';
 import PrimaryNav from '../components/organisms/PrimaryNav/PrimaryNav';
 import Footer from '../components/organisms/Footer/Footer';
-// import { get, isEqual } from 'lodash';
+import { get } from 'lodash';
 
 const Container = styled.div`
   padding: 32px 8px 72px 8px;
@@ -27,8 +27,13 @@ class AppContainer extends React.Component {
       axios.get(newsUrl)
       .then(res => {
           const articles = res.data.articles;
+          // const articles = get(res, `data.articles`, []);
           this.setState({ articles });
       })
+      .catch(function (error) {
+        console.log('error caught');
+        console.log(error);
+      });
   }
   
   changeChannel = (e) => {
@@ -44,7 +49,11 @@ class AppContainer extends React.Component {
         <Header/>
         <Container>
           <PrimaryNav changeChannel={this.changeChannel}/>
-          <NewsList articles={this.state.articles}/>
+          {this.state.articles !== 0 ? (
+            <NewsList articles={this.state.articles}/>   
+          ) : (
+            <div>LOADING</div>
+          )}
         </Container>
         <Footer/>
       </div>

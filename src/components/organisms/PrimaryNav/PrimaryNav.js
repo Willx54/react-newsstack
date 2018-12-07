@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import {rem} from 'polished'; 
 
 const Menu = styled.nav`
   padding: 0 4px;
+  margin-bottom: ${rem('12px')};
   ul {
     list-style-type: none;
     padding: 0;
@@ -23,24 +25,56 @@ const Menu = styled.nav`
     }
   }
   @media only screen and (min-width: 1000px) {
+    margin: ${rem('16px')} 0 ${rem('24px')} 0;
     ul {
-   
+        /* margin-left: ${rem('-24px')} */
     }
     li {
-        border-right: 1px solid black;
-        padding: 0 16px;
+        border-right: 1px solid #4b4b4b;
+        padding: 0 ${rem('24px')};
     }
     li:last-child {
         border-right: none;
     }
     button {
         background-color: transparent;
-        color: #000;
-        font-size: 20px;
-        padding: 0;
+        color: #4b4b4b;
+        font-size: ${rem('18px')};
+        padding: 0 0 5px 0;
+        outline: none;
+        display: inline-block;
+        vertical-align: middle;
+        -webkit-transform: perspective(1px) translateZ(0);
+        transform: perspective(1px) translateZ(0);
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+        position: relative;
+        overflow: hidden;
+        border-radius: 0;
+        &:before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            left: 51%;
+            right: 51%;
+            bottom: 0;
+            background: #3C97CE;
+            height: 3px;
+            -webkit-transition-property: left, right;
+            transition-property: left, right;
+            -webkit-transition-duration: 0.15s;
+            transition-duration: 0.15s;
+            -webkit-transition-timing-function: ease-out;
+            transition-timing-function: ease-out;
+        }
+        &:hover:before, &:focus:before, &:active:before {
+            left: 0;
+            right: 0;
+        }
     }
   }
-`;      
+`;   
+
+
 
 const PrimaryNav = (props) => {
     const { changeChannel } = props;

@@ -5,7 +5,8 @@ import styled from 'styled-components';
 import Header from '../components/organisms/Header/Header';
 import PrimaryNav from '../components/organisms/PrimaryNav/PrimaryNav';
 import Footer from '../components/organisms/Footer/Footer';
-import { get } from 'lodash';
+import Spinner from '../components/atoms/Spinner/Spinner';
+
 
 const Container = styled.div`
   padding: 32px 8px 72px 8px;
@@ -15,11 +16,46 @@ const Container = styled.div`
 
 class AppContainer extends React.Component {
   state = {
-    articles: []
+    articles: [],
+    channels: [
+      {
+        name: 'bbc',
+        urlStr: 'bbc-news'
+        
+      },
+      {
+        name: 'cnn',
+        urlStr: 'cnn'
+        
+      },
+      {
+        name: 'financial times',
+        urlStr: 'financial-times'
+        
+      },
+      {
+        name: 'independent',
+        urlStr: 'independent'
+      },
+      {
+        name: 'mtv news',
+        urlStr: 'mtv-news'
+      },
+      {
+        name: 'national geographic',
+        urlStr: 'national-geographic'
+      }
+    ],
+    selectedChannel: ''
   }
 
   componentDidMount() {
-    this.getNews('bbc-news');
+    this.setState({
+      selectedChannel: this.state.channels[0].urlStr
+    }, () => {
+      this.getNews(this.state.selectedChannel);
+    });
+    
   }
 
   getNews = (channel) => {
@@ -27,7 +63,6 @@ class AppContainer extends React.Component {
       axios.get(newsUrl)
       .then(res => {
           const articles = res.data.articles;
-          // const articles = get(res, `data.articles`, []);
           this.setState({ articles });
       })
       .catch(function (error) {
@@ -37,8 +72,11 @@ class AppContainer extends React.Component {
   }
   
   changeChannel = (e) => {
-    let newChannel = e.target.id;
-    this.getNews(newChannel);
+    this.setState({
+      selectedChannel: e.target.id
+    }, () => {
+      this.getNews(this.state.selectedChannel);
+    });
   }
   
 
@@ -48,11 +86,11 @@ class AppContainer extends React.Component {
       <div>
         <Header/>
         <Container>
-          <PrimaryNav changeChannel={this.changeChannel}/>
-          {this.state.articles !== 0 ? (
+          <PrimaryNav channels={this.state.channels} changeChannel={this.changeChannel} selectedChannel={this.state.selectedChannel}/>
+          {this.state.articles.length !== 0 ? (
             <NewsList articles={this.state.articles}/>   
           ) : (
-            <div>LOADING</div>
+            <Spinner></Spinner>
           )}
         </Container>
         <Footer/>

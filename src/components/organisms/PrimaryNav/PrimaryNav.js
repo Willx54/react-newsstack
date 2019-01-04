@@ -13,17 +13,6 @@ const Menu = styled.nav`
   li {
     display: inline;
   }
-  button {
-    background-color: #27546f;
-    border: none;
-    border-radius: 3px;
-    color: #fff;
-    padding: 4px;
-    margin: 4px;
-    &:hover {
-        cursor: pointer;
-    }
-  }
   @media only screen and (min-width: 1000px) {
     margin: ${rem('16px')} 0 ${rem('24px')} 0;
     ul {
@@ -36,7 +25,20 @@ const Menu = styled.nav`
     li:last-child {
         border-right: none;
     }
-    button {
+  }
+`;   
+
+const Button = styled.button`
+    background-color: #27546f;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    padding: 4px;
+    margin: 4px;
+    &:hover {
+        cursor: pointer;
+    }
+  @media only screen and (min-width: 1000px) {
         background-color: transparent;
         color: #4b4b4b;
         font-size: ${rem('18px')};
@@ -54,10 +56,10 @@ const Menu = styled.nav`
             content: "";
             position: absolute;
             z-index: -1;
-            left: 51%;
-            right: 51%;
+            left: ${props => props.selected ? '0' : '51%'};
+            right: ${props => props.selected ? '0' : '51%'};
             bottom: 0;
-            background: #3C97CE;
+            background: #27546f;
             height: 3px;
             -webkit-transition-property: left, right;
             transition-property: left, right;
@@ -70,23 +72,17 @@ const Menu = styled.nav`
             left: 0;
             right: 0;
         }
-    }
   }
-`;   
-
+`;
+// ${props => props.selected ? '0' : '51%'}
 
 
 const PrimaryNav = (props) => {
-    const { changeChannel } = props;
+    const { changeChannel, channels, selectedChannel } = props;
     return(
         <Menu>
             <ul>
-                <li><button id="bbc-news" onClick={changeChannel}>bbc</button></li>
-                <li><button id="cnn" onClick={changeChannel}>cnn</button></li>
-                <li><button id="financial-times" onClick={changeChannel}>financial times</button></li>
-                <li><button id="independent" onClick={changeChannel}>independent</button></li>
-                <li><button id="mtv-news" onClick={changeChannel}>mtv</button></li>
-                <li><button id="national-geographic" onClick={changeChannel}>national geographic</button></li>
+                {channels.map(channel => <li key={channel.urlStr} ><Button id={channel.urlStr} onClick={changeChannel} selected={selectedChannel === channel.urlStr ? true : false}>{channel.name}</Button></li>)}
             </ul>
         </Menu>
     );

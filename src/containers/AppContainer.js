@@ -3,10 +3,10 @@ import axios from 'axios';
 import NewsList from '../components/organisms/NewsList/NewsList';
 import styled from 'styled-components';
 import Header from '../components/organisms/Header/Header';
-import PrimaryNav from '../components/organisms/PrimaryNav/PrimaryNav';
 import Footer from '../components/organisms/Footer/Footer';
-import Spinner from '../components/atoms/Spinner/Spinner';
-
+import MyStack from '../components/organisms/MyStack/MyStack';
+import Contact from '../components/organisms/Contact/Contact';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const Container = styled.div`
   padding: 32px 8px 72px 8px;
@@ -17,6 +17,7 @@ const Container = styled.div`
 class AppContainer extends React.Component {
   state = {
     articles: [],
+    myStack: [],
     channels: [
       {
         name: 'bbc',
@@ -78,26 +79,30 @@ class AppContainer extends React.Component {
       this.getNews(this.state.selectedChannel);
     });
   }
-  
 
+  updateMyStack = (e) => {
+    console.log('updateMyStack source:', e.target.id);
+    this.setState({myStack: e.target.id})
+  }
+  
   render() {
 
     return (
-      <div>
-        <Header/>
-        <Container>
-          <PrimaryNav channels={this.state.channels} changeChannel={this.changeChannel} selectedChannel={this.state.selectedChannel}/>
-          {this.state.articles.length !== 0 ? (
-            <NewsList articles={this.state.articles}/>   
-          ) : (
-            <Spinner></Spinner>
-          )}
-        </Container>
-        <Footer/>
-      </div>
+      <Router>
+        <div>
+          <Header/>
+          <Container>
+            <Route path="/" exact render={() => <NewsList articles={this.state.articles} channels={this.state.channels} changeChannel={this.changeChannel} selectedChannel={this.state.selectedChannel}/>}/>
+            <Route path="/my-stack" render={() => <MyStack myStack={this.state.myStack} updateMyStack={this.updateMyStack}/>} />
+            <Route path="/contact" component={Contact} />
+          </Container>
+          <Footer/>
+        </div> 
+      </Router>
     );
   }
 }
 
 export default AppContainer;
+
 

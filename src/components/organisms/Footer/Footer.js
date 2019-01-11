@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import styled from 'styled-components';
 
 const FooterWrap = styled.footer`
@@ -28,9 +29,10 @@ const PoweredBy = styled.span`
     }
 `
 
-const ContactLink = styled.span`
+const ContactLink = styled(Link)`
     color: #fff;
     opacity: 0.5;
+    text-decoration: none;
     &:hover {
         text-decoration: underline;
         cursor: pointer;
@@ -42,7 +44,7 @@ const Footer = (props) => {
         <FooterWrap>
             <Container>
                 <PoweredBy>powered by <a href="https://newsapi.org/" target="_blank" rel="noopener noreferrer">newsapi.org</a></PoweredBy>
-                <ContactLink href="mailto:W_Priddle@hotmail.com">contact</ContactLink>
+                <ContactLink to="/contact">contact</ContactLink>
             </Container>
         </FooterWrap>
     );

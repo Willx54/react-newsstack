@@ -1,6 +1,8 @@
 import React from 'react';
 import NewsItem from '../../molecules/NewsItem/NewsItem';
+import PrimaryNav from '../PrimaryNav/PrimaryNav';
 import styled from 'styled-components';
+import Spinner from '../../atoms/Spinner/Spinner';
 
 const List = styled.ul`
     display: flex;
@@ -13,11 +15,15 @@ const List = styled.ul`
 const NewsList = (props) => { 
     return (
         <div>
-        <List>
-            {props.articles.map(article => <NewsItem key={article.url} article={article}/>)}
-        </List>
-        
-    </div>
+            <PrimaryNav channels={props.channels} changeChannel={props.changeChannel} selectedChannel={props.selectedChannel}/>
+            {props.articles.length !== 0 ? (
+                <List>
+                {props.articles.map(article => <NewsItem key={article.url} article={article}/>)}
+            </List>
+            ) : (
+            <Spinner></Spinner>
+            )}    
+        </div>
     );
 }
 

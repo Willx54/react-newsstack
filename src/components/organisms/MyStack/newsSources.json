@@ -1,0 +1,130 @@
+[
+    {
+      "name": "ABC News",
+      "urlStr": "abc-news"    
+    },
+    {
+      "name": "ABC News (AU)",
+      "urlStr": "abc-news-au"    
+    },
+    {
+      "name": "Aftenposten",
+      "urlStr": "aftenposten"    
+    },
+    {
+      "name": "Al Jazeera English",
+      "urlStr": "al-jazeera-english"    
+    },
+    {
+      "name": "ANSA.it",
+      "urlStr": "ansa"    
+    },
+    {
+      "name": "Argaam",
+      "urlStr": "argaam"    
+    },
+    {
+      "name": "Ars Technica",
+      "urlStr": "ars-technica"    
+    },
+    {
+      "name": "Ary News",
+      "urlStr": "ary-news"    
+    },
+    {
+      "name": "Associated Press",
+      "urlStr": "associated-press"    
+    },
+    {
+      "name": "Australian Financial Review",
+      "urlStr": "australian-financial-review"    
+    },
+    {
+      "name": "Axios",
+      "urlStr": "axios"    
+    },
+    {
+      "name": "BBC News",
+      "urlStr": "bbc-news"    
+    },
+    {
+      "name": "BBC Sport",
+      "urlStr": "bbc-sport"    
+    },
+    {
+      "name": "Bild",
+      "urlStr": "bild"    
+    },
+    {
+      "name": "Blasting News (BR)",
+      "urlStr": "blasting-news-br"    
+    },
+    {
+      "name": "Bleacher Report",
+      "urlStr": "bleacher-report"    
+    },
+    {
+      "name": "Bloomberg",
+      "urlStr": "bloomberg"    
+    },
+    {
+      "name": "Breitbart News",
+      "urlStr": "breitbart-news"    
+    },
+    {
+      "name": "Business Insider",
+      "urlStr": "business-insider"    
+    },
+    {
+      "name": "Business Insider (UK)",
+      "urlStr": "business-insider-uk"    
+    },
+    {
+      "name": "Buzzfeed",
+      "urlStr": "buzzfeed"    
+    },
+    {
+      "name": "CBC News",
+      "urlStr": "cbc-news"    
+    },
+    {
+      "name": "CBS News",
+      "urlStr": "cbs-news"    
+    },
+    {
+      "name": "CNBC",
+      "urlStr": "cnbc"    
+    },
+    {
+      "name": "CNN",
+      "urlStr": "cnn"    
+    },
+    {
+      "name": "CNN Spanish",
+      "urlStr": "cnn-es"    
+    },
+    {
+      "name": "Crypto Coins News",
+      "urlStr": "crypto-coins-news"    
+    },
+    {
+      "name": "Daily Mail",
+      "urlStr": "daily-mail"    
+    },
+    {
+      "name": "Der Tagesspiegel",
+      "urlStr": "der-tagesspiegel"    
+    },
+    {
+      "name": "Die Zeit",
+      "urlStr": "die-zeit"    
+    },
+    {
+      "name": "El Mundo",
+      "urlStr": "el-mundo"    
+    },
+    {
+      "name": "Engadget",
+      "urlStr": "engadget"    
+    }
+]

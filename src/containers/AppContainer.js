@@ -7,6 +7,7 @@ import Footer from '../components/organisms/Footer/Footer';
 import MyStack from '../components/organisms/MyStack/MyStack';
 import Contact from '../components/organisms/Contact/Contact';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import newsSources from '../components/organisms/MyStack/newsSources.json';
 
 const Container = styled.div`
   padding: 32px 8px 72px 8px;
@@ -58,12 +59,16 @@ class AppContainer extends React.Component {
   }
 
  saveStack = () => {
-   
    let tempArray = [...this.state.myStack];
+   let copiedNewsSource = [...copiedNewsSource]
    if (tempArray.length) {
     console.log('STACK SAVED');
-    // push whole object here
-    // this.setState({channels: tempArray});
+    // filter newsSources.json and construct a new temporary object
+    // setstate of channels to same as temporary object
+    // let res = copiedNewsSource.filter(function (el) {
+    //   return tempArray.indexOf(el.urlStr) >= 0; 
+    // });
+    // console.log('res: ' ,res);
    } else {
      console.log('NOTHING HAPPENED');
    }
@@ -93,24 +98,24 @@ class AppContainer extends React.Component {
 
   updateMyStack = (e) => {
     let testId = e.target.id;
-      let tempArray = [...this.state.myStack];
-      let index = tempArray.indexOf(e.target.id);
-      if (index !== -1) {
-        this.setState({stackLimitReached: false});
-        tempArray.splice(index, 1);
-        this.setState({myStack: tempArray}, () => {
-          console.log(this.state.myStack);
-        });
-      } else if (this.state.myStack.length <= 7) {
-        this.setState({stackLimitReached: false});
-        tempArray.push(e.target.id);
-        this.setState({myStack: tempArray}, () => {
-          console.log(this.state.myStack);
-        });
-      } else {
-        this.setState({stackLimitReached: true});
-      }
-      tempArray = tempArray.sort();
+    let tempArray = [...this.state.myStack];
+    let index = tempArray.indexOf(e.target.id);
+    if (index !== -1) {
+      this.setState({stackLimitReached: false});
+      tempArray.splice(index, 1);
+      this.setState({myStack: tempArray}, () => {
+        console.log(this.state.myStack);
+      });
+    } else if (this.state.myStack.length <= 7) {
+      this.setState({stackLimitReached: false});
+      tempArray.push(e.target.id);
+      this.setState({myStack: tempArray}, () => {
+        console.log(this.state.myStack);
+      });
+    } else {
+      this.setState({stackLimitReached: true});
+    }
+    tempArray = tempArray.sort();
   }
 
   updateCheckedStatus = (urlStr) => {

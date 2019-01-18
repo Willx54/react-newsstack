@@ -18,21 +18,19 @@ class AppContainer extends React.Component {
   state = {
     articles: [],
     myStack: [],
+    stackLimitReached: false,
     channels: [
       {
         name: 'bbc',
         urlStr: 'bbc-news'
-        
       },
       {
         name: 'cnn',
         urlStr: 'cnn'
-        
       },
       {
         name: 'financial times',
         urlStr: 'financial-times'
-        
       },
       {
         name: 'independent',
@@ -59,6 +57,19 @@ class AppContainer extends React.Component {
     
   }
 
+ saveStack = () => {
+   
+   let tempArray = [...this.state.myStack];
+   if (tempArray.length) {
+    console.log('STACK SAVED');
+    // push whole object here
+    // this.setState({channels: tempArray});
+   } else {
+     console.log('NOTHING HAPPENED');
+   }
+   
+ }
+
   getNews = (channel) => {
     let newsUrl = `https://newsapi.org/v2/top-headlines?sources=${channel}&apiKey=22584ee7883646308b29d728c5895470`;
       axios.get(newsUrl)
@@ -81,8 +92,35 @@ class AppContainer extends React.Component {
   }
 
   updateMyStack = (e) => {
-    console.log('updateMyStack source:', e.target.id);
-    this.setState({myStack: e.target.id})
+    let testId = e.target.id;
+      let tempArray = [...this.state.myStack];
+      let index = tempArray.indexOf(e.target.id);
+      if (index !== -1) {
+        this.setState({stackLimitReached: false});
+        tempArray.splice(index, 1);
+        this.setState({myStack: tempArray}, () => {
+          console.log(this.state.myStack);
+        });
+      } else if (this.state.myStack.length <= 7) {
+        this.setState({stackLimitReached: false});
+        tempArray.push(e.target.id);
+        this.setState({myStack: tempArray}, () => {
+          console.log(this.state.myStack);
+        });
+      } else {
+        this.setState({stackLimitReached: true});
+      }
+      tempArray = tempArray.sort();
+  }
+
+  updateCheckedStatus = (urlStr) => {
+    let tempArray = [...this.state.myStack];
+    let index = tempArray.indexOf(urlStr);
+    if (index !== -1) {
+      return true;
+    } else {
+      return false;
+    }
   }
   
   render() {
@@ -93,7 +131,7 @@ class AppContainer extends React.Component {
           <Header/>
           <Container>
             <Route path="/" exact render={() => <NewsList articles={this.state.articles} channels={this.state.channels} changeChannel={this.changeChannel} selectedChannel={this.state.selectedChannel}/>}/>
-            <Route path="/my-stack" render={() => <MyStack myStack={this.state.myStack} updateMyStack={this.updateMyStack}/>} />
+            <Route path="/my-stack" render={() => <MyStack myStack={this.state.myStack} updateMyStack={this.updateMyStack} stackLimitReached={this.state.stackLimitReached} updateCheckedStatus={this.updateCheckedStatus} saveStack={this.saveStack}/>} />
             <Route path="/contact" component={Contact} />
           </Container>
           <Footer/>

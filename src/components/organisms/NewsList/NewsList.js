@@ -13,11 +13,12 @@ const List = styled.ul`
 `;
 
 const NewsList = (props) => { 
+    console.log('props.selectedChannel:' ,props.selectedChannel);
     return (
         <div>
             <PrimaryNav channels={props.channels} changeChannel={props.changeChannel} selectedChannel={props.selectedChannel}/>
             {props.articles.length !== 0 ? (
-                <List>
+            <List>
                 {props.articles.map(article => <NewsItem key={article.url} article={article}/>)}
             </List>
             ) : (

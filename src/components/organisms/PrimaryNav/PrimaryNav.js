@@ -82,7 +82,7 @@ const PrimaryNav = (props) => {
     return(
         <Menu>
             <ul>
-                {channels.map(channel => <li key={channel.urlStr} ><Button id={channel.urlStr} onClick={changeChannel} selected={selectedChannel === channel.urlStr ? true : false}>{channel.name}</Button></li>)}
+                {channels.map(channel => <li key={channel.id} ><Button id={channel.id} onClick={changeChannel} selected={selectedChannel === channel.id ? true : false}>{channel.name}</Button></li>)}
             </ul>
         </Menu>
     );

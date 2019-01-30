@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {Add} from 'styled-icons/material/Add'
 import styled from 'styled-components';
 import logo from './logo.svg';
@@ -68,10 +68,12 @@ const Header = (props) => {
         <HeaderWrap>
             <Container>
                 <Logo to="/"><h1>newsstack</h1></Logo>
-                <MyNewsLink to="/my-stack"><StyledAdd/></MyNewsLink>
+                <Route exact path="/" render={() => <MyNewsLink to="/my-stack"><StyledAdd/></MyNewsLink>} />
+                
             </Container>
         </HeaderWrap>
     );
 }
 
+    
 export default Header;

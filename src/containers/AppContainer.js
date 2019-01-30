@@ -189,7 +189,7 @@ class AppContainer extends React.Component {
             <Route path="/" exact render={() => <NewsList articles={this.state.articles} channels={this.state.channels} changeChannel={this.changeChannel} selectedChannel={this.state.selectedChannel}/>}/>
             <Route path="/my-stack" render={() => <MyStack myStack={this.state.myStack} updateMyStack={this.updateMyStack} stackLimitReached={this.state.stackLimitReached} updateCheckedStatus={this.updateCheckedStatus} saveStack={this.saveStack}/>} />
             <Route path="/contact" component={Contact} />
-            <MyNewsLink to="/my-stack"><StyledAdd /></MyNewsLink>
+            <Route exact path="/" render={() => <MyNewsLink to="/my-stack"><StyledAdd/></MyNewsLink>} />
           </Container>
           <Footer/>
         </div> 

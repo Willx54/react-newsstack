@@ -4,19 +4,29 @@ import styled from 'styled-components';
 
 const SourceList = styled.ol`
     list-style-type: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    height: 300px;
+    overflow-y: scroll;
+    @media only screen and (min-width: 700px) {
+        height: 600px;
+        }
     li {
         display: inline-block;
         width: 50%;
-        @media only screen and (min-width: 600px) {
-        width: 50%;
-    }
-    @media only screen and (min-width: 900px) {
-        width: 25%;
-    }
-    @media only screen and (min-width: 1100px) {
-        width: 20%;
-    }
-    }
+        @media only screen and (min-width: 455px) {
+            width: 33.333%;
+        }
+        @media only screen and (min-width: 670px) {
+            width: 25%;
+        }
+        @media only screen and (min-width: 890px) {
+            width: 20%;
+        }
+        @media only screen and (min-width: 1120px) {
+            width: 16.666%;
+        }
     }
 
     input {
@@ -24,8 +34,6 @@ const SourceList = styled.ol`
     }
 
     label {
-        border: 1px solid #fff;
-        padding: 10px;
         display: block;
         position: relative;
         margin: 10px;
@@ -33,21 +41,23 @@ const SourceList = styled.ol`
     }
 
     label:before {
-        background-color: white;
+        z-index: 10;
+        background-color: #3f87b3;
         color: white;
         content: " ";
         display: block;
         border-radius: 50%;
-        border: 1px solid grey;
         position: absolute;
-        top: -5px;
-        left: -5px;
-        width: 25px;
-        height: 25px;
+        top: -4px;
+        left: -4px;
+        width: 32px;
+        height: 32px;
         text-align: center;
         line-height: 28px;
         transition-duration: 0.4s;
         transform: scale(0);
+        box-sizing: border-box;
+        padding-top: 3px;
     }
 
     label img {
@@ -63,8 +73,9 @@ const SourceList = styled.ol`
     }
 
     input:checked + label:before {
+        z-index: 10;
         content: "✓";
-        background-color: grey;
+        background-color: #3f87b3;
         transform: scale(1);
     }
 
@@ -79,9 +90,9 @@ const SourceList = styled.ol`
         text-align: center;
         margin: 0 auto 0 auto;
         padding: 8px;
-        background-color: rgba(255,255,255,0.3);
+        background-color: rgba(255,255,255,0.5);
         position: absolute;
-        bottom: 10px;
+        bottom: 0;
         left: 0;
         right: 0;
     }
@@ -107,7 +118,9 @@ const MyStack = (props) => {
                     <li key={source.id}>
                         <input type="checkbox" key={source.id} id={source.id} onClick={updateMyStack} checked={updateCheckedStatus(source.id)}/>
                         <label htmlFor={source.id}>
-                            <img src="http://lorempixel.com/101/101" alt={source.name} />
+                        <img src={require('../../../images/default.svg')} alt={source.name} />
+                    
+                     
                             <p>{source.name}</p>
                         </label>
                         

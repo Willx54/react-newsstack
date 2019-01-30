@@ -1,17 +1,22 @@
 import React from 'react';
 import newsSources from '../../../newsSources/newsSources.json';
 import styled from 'styled-components';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+const SourceListWrap = styled.div`
+height: 300px;
+overflow-y: scroll;
+margin-bottom: 32px;
+@media only screen and (min-width: 700px) {
+    height: 500px;
+    }
+`;
 
 const SourceList = styled.ol`
     list-style-type: none;
     width: 100%;
     padding: 0;
     margin: 0;
-    height: 300px;
-    overflow-y: scroll;
-    @media only screen and (min-width: 700px) {
-        height: 600px;
-        }
     li {
         display: inline-block;
         width: 50%;
@@ -90,16 +95,22 @@ const SourceList = styled.ol`
         text-align: center;
         margin: 0 auto 0 auto;
         padding: 8px;
-        background-color: rgba(255,255,255,0.5);
+        background-color: rgba(255,255,255,0.7);
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
+        text-transform:uppercase;
+        font-weight: bold;
     }
     input:checked + label p {
         display: none;
     }
 `;
+
+const Panel = styled.div`
+margin-bottom: 32px;
+`
 
 const MyStack = (props) => { 
     const {myStack, stackLimitReached, updateMyStack, updateCheckedStatus, saveStack} = props;
@@ -112,22 +123,27 @@ const MyStack = (props) => {
         <div>
             <h1>My Stack</h1>
             <p>Select your own personal stack and save it to your browser's cache for next time.</p>
-            <p>{message}</p>
+            
+            <SourceListWrap>
             <SourceList>
                 {newsSources.map(source => 
                     <li key={source.id}>
                         <input type="checkbox" key={source.id} id={source.id} onClick={updateMyStack} checked={updateCheckedStatus(source.id)}/>
                         <label htmlFor={source.id}>
-                        <img src={require('../../../images/default.svg')} alt={source.name} />
-                    
-                     
+                        <img src={require('../../../images/'+source.id+'.png')} alt={source.name} />    
                             <p>{source.name}</p>
                         </label>
                         
                     </li>
                 )}
             </SourceList>
+            </SourceListWrap>
+            <Panel>
+            <p>{message}</p>
             <button onClick={saveStack}>save stack</button>
+            <Link to="/"><button>back</button></Link>
+            </Panel>
+            
         </div>
     );
 }

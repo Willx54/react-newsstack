@@ -1,15 +1,20 @@
 import React from 'react';
 import newsSources from '../../../newsSources/newsSources.json';
-import styled from 'styled-components';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import styled, {css} from 'styled-components';
+import { Link } from "react-router-dom";
+
+const Container = styled.div`
+    position: relative;
+`;
 
 const SourceListWrap = styled.div`
-height: 300px;
+    margin: 40px 0;
+/* height: 300px;
 overflow-y: scroll;
 margin-bottom: 32px;
 @media only screen and (min-width: 700px) {
     height: 500px;
-    }
+    } */
 `;
 
 const SourceList = styled.ol`
@@ -30,7 +35,7 @@ const SourceList = styled.ol`
             width: 20%;
         }
         @media only screen and (min-width: 1120px) {
-            width: 16.666%;
+            width: 14.2857143%;
         }
     }
 
@@ -102,28 +107,71 @@ const SourceList = styled.ol`
         right: 0;
         text-transform:uppercase;
         font-weight: bold;
+        transition: opacity 0.2s ease;
+        opacity: 1;
     }
     input:checked + label p {
-        display: none;
+        opacity: 0;
     }
 `;
 
 const Panel = styled.div`
-margin-bottom: 32px;
+    margin-bottom: 32px;
 `
 
+const Button =styled.button`
+    background-color: #3f87b3;
+    border: none;
+    padding: 16px 24px;
+    width: 100%;
+    color: #fff;
+    transition: opacity ease 0.3s;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    outline: none;
+    &:hover {
+        opacity: 0.7;
+    }
+    ${props =>
+        props.saveLock &&
+        css`
+            background-color: #ddd;
+            cursor: default;
+            &:hover {
+                opacity: 1;
+            }
+    `};
+`;
+
+const StyledLink = styled(Link)`
+    color: #3f87b3;
+    position: absolute;
+    right: 12px;
+    top: -24px;
+    text-transform: uppercase;
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+`;
+
 const MyStack = (props) => { 
-    const {myStack, stackLimitReached, updateMyStack, updateCheckedStatus, saveStack} = props;
-    let message = `Number of sources selected:${myStack.length}`;
+    const {myStack, stackLimitReached, updateMyStack, updateCheckedStatus, saveStack, saveLock, saveButtonText} = props;
+    let message = `Please select from 1 to 6 sources to save.`;
+    if (myStack.length > 0) {
+        message = `Number of sources selected:${myStack.length}`;
+    }
     if (stackLimitReached) {
         message = 'You have reached you stack limit';
     }
     
     return (
-        <div>
+        <Container>
+        <StyledLink to="/">home</StyledLink>
             <h1>My Stack</h1>
-            <p>Select your own personal stack and save it to your browser's cache for next time.</p>
-            
+            <p>Select your own personal stack and save it to your browser's memory for next time.</p>
             <SourceListWrap>
             <SourceList>
                 {newsSources.map(source => 
@@ -140,11 +188,10 @@ const MyStack = (props) => {
             </SourceListWrap>
             <Panel>
             <p>{message}</p>
-            <button onClick={saveStack}>save stack</button>
-            <Link to="/"><button>back</button></Link>
+            <Button saveLock={saveLock} onClick={saveStack}>{saveButtonText}</Button>
             </Panel>
             
-        </div>
+        </Container>
     );
 }
 

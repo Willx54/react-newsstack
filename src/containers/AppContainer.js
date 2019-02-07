@@ -82,7 +82,9 @@ class AppContainer extends React.Component {
         id: 'national-geographic'
       }
     ],
-    selectedChannel: ''
+    selectedChannel: '',
+    saveLock: true,
+    saveButtonText: 'Save Stack'
   }
 
   componentDidMount() {
@@ -108,11 +110,10 @@ class AppContainer extends React.Component {
   }
 
  saveStack = () => {
-   console.log(this.state.myStack);
    let myStackArray = [...this.state.myStack];
    if (myStackArray.length) {
     localStorage.setItem('myStack', JSON.stringify(myStackArray));
-    console.log('STACK SAVED');
+
     // update current live channels also
     const copiedNewsSources = [...newsSources];
     let filteredNewsSources = copiedNewsSources.filter(function (el) {
@@ -120,12 +121,14 @@ class AppContainer extends React.Component {
     });
     this.setState({
       channels: filteredNewsSources,
-      selectedChannel: filteredNewsSources[0].id
+      selectedChannel: filteredNewsSources[0].id,
+      saveLock: true,
+      saveButtonText: 'Saved'
     }, () => {
       this.getNews(this.state.selectedChannel);
     });
    } else {
-     console.log('NOTHING HAPPENED');
+
    }
  }
 
@@ -137,7 +140,6 @@ class AppContainer extends React.Component {
           this.setState({ articles });
       })
       .catch(function (error) {
-        console.log('error caught');
         console.log(error);
       });
   }
@@ -153,12 +155,13 @@ class AppContainer extends React.Component {
   updateMyStack = (e) => {
     let tempArray = [...this.state.myStack];
     let index = tempArray.indexOf(e.target.id);
+
     if (index !== -1) {
       this.setState({stackLimitReached: false});
       tempArray.splice(index, 1);
       this.setState({myStack: tempArray}, () => {
       });
-    } else if (this.state.myStack.length <= 7) {
+    } else if (this.state.myStack.length <= 5) {
       this.setState({stackLimitReached: false});
       tempArray.push(e.target.id);
       this.setState({myStack: tempArray}, () => {
@@ -167,6 +170,14 @@ class AppContainer extends React.Component {
       this.setState({stackLimitReached: true});
     }
     tempArray = tempArray.sort();
+
+    if (tempArray.length > 0) {
+      this.setState({saveLock: false,
+        saveButtonText: 'Save Stack'});
+            
+    } else {
+      this.setState({saveLock: true});
+    }
   }
 
   updateCheckedStatus = (urlStr) => {
@@ -187,7 +198,7 @@ class AppContainer extends React.Component {
           <Header/>
           <Container>
             <Route path="/" exact render={() => <NewsList articles={this.state.articles} channels={this.state.channels} changeChannel={this.changeChannel} selectedChannel={this.state.selectedChannel}/>}/>
-            <Route path="/my-stack" render={() => <MyStack myStack={this.state.myStack} updateMyStack={this.updateMyStack} stackLimitReached={this.state.stackLimitReached} updateCheckedStatus={this.updateCheckedStatus} saveStack={this.saveStack}/>} />
+            <Route path="/my-stack" render={() => <MyStack saveLock={this.state.saveLock} saveButtonText={this.state.saveButtonText} myStack={this.state.myStack} updateMyStack={this.updateMyStack} stackLimitReached={this.state.stackLimitReached} updateCheckedStatus={this.updateCheckedStatus} saveStack={this.saveStack}/>} />
             <Route path="/contact" component={Contact} />
             <Route exact path="/" render={() => <MyNewsLink to="/my-stack"><StyledAdd/></MyNewsLink>} />
           </Container>

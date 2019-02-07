@@ -13,7 +13,6 @@ const List = styled.ul`
 `;
 
 const NewsList = (props) => { 
-    console.log('props.selectedChannel:' ,props.selectedChannel);
     return (
         <div>
             <PrimaryNav channels={props.channels} changeChannel={props.changeChannel} selectedChannel={props.selectedChannel}/>

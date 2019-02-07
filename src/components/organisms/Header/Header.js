@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import {Add} from 'styled-icons/material/Add'
 import styled from 'styled-components';
 import logo from './logo.svg';
@@ -19,12 +19,22 @@ const Container = styled.div`
 `;
 
 const Logo = styled(Link)`
+    margin: 0 auto;
     h1{
-        background: url(${logo}) center center no-repeat;
-        margin: 0;
-        width: 250px;
-        height: 50px;
+        background: url(${logo}) center center no-repeat;   
+        background-size: 100% auto;
+        display: block;
+        width: 150px;
+        height: auto;
         text-indent: -9999px;
+        @media only screen and (min-width: 400px) {
+            margin: 0;
+            width: 250px;
+            height: 50px;
+        }
+    }
+    @media only screen and (min-width: 400px) {
+        margin: 0;
     }
 `;
 

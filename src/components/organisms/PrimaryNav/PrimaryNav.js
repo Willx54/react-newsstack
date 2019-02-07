@@ -28,13 +28,20 @@ const Menu = styled.nav`
   }
 `;   
 
+// $primary-color: #27546f;
+// $secondary-color: #000e17;
+// $tertiary-color: #becbd3;
+// $quaternery-color: #3f87b3;
+
 const Button = styled.button`
-    background-color: #27546f;
+    font-family: 'Roboto', sans-serif;
+    background-color: ${props => props.selected ? '#becbd3' : '#27546f'};;
     border: none;
     border-radius: 3px;
     color: #fff;
     padding: 4px;
     margin: 4px;
+    outline: none;
     &:hover {
         cursor: pointer;
     }

@@ -28,13 +28,20 @@ const Menu = styled.nav`
   }
 `;   
 
+// $primary-color: #27546f;
+// $secondary-color: #000e17;
+// $tertiary-color: #becbd3;
+// $quaternery-color: #3f87b3;
+
 const Button = styled.button`
-    background-color: #27546f;
+    font-family: 'Roboto', sans-serif;
+    background-color: ${props => props.selected ? '#becbd3' : '#27546f'};;
     border: none;
     border-radius: 3px;
     color: #fff;
     padding: 4px;
     margin: 4px;
+    outline: none;
     &:hover {
         cursor: pointer;
     }
@@ -82,7 +89,7 @@ const PrimaryNav = (props) => {
     return(
         <Menu>
             <ul>
-                {channels.map(channel => <li key={channel.urlStr} ><Button id={channel.urlStr} onClick={changeChannel} selected={selectedChannel === channel.urlStr ? true : false}>{channel.name}</Button></li>)}
+                {channels.map(channel => <li key={channel.id} ><Button id={channel.id} onClick={changeChannel} selected={selectedChannel === channel.id ? true : false}>{channel.name}</Button></li>)}
             </ul>
         </Menu>
     );
